@@ -1,0 +1,26 @@
+{
+  "name": "get-celebrity-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app/index.js",
+  "scripts": {
+    "dev": "NODE_ENV=development nodemon main",
+    "prod": "NODE_ENV=production node main"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.key-g.com/e.burobina/get-celebrity-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@koa/cors": "^2.2.3",
+    "koa": "^2.6.2",
+    "koa-router": "^7.4.0"
+  },
+  "devDependencies": {
+    "dotenv": "^6.2.0",
+    "nodemon": "^1.18.9"
+  }
+}
