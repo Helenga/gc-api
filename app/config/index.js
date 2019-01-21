@@ -1,4 +1,5 @@
 const dotenv = require('dotenv');
+const path = require('path');
 
 dotenv.config()
 
@@ -16,7 +17,7 @@ module.exports = {
   },
   log: {
     path: process.env.IS_LOG_DIRECTORY_RELATIVE_PATH ?
-      `${__dirname}/${process.env.LOG_DIRECTORY}/${process.env.LOG_FILENAME}` :
+      path.resolve(`${process.env.LOG_DIRECTORY}/${process.env.LOG_FILENAME}`) :
       `~/${process.env.LOG_DIRECTORY}/${process.env.LOG_FILENAME}`,
     level: process.env.NODE_ENV !== 'production' ?
       process.env.LOG_LEVEL_DEV :
