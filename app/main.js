@@ -10,6 +10,7 @@ app.use(middlewares.logger.entry())
 app.use(middlewares.logger.handler())
 app.use(middlewares.cors())
 app.use(middlewares.bodyparser())
+app.use(middlewares.responseWrapper)
 
 // ROUTER SETUP
 app.use(router.routes())

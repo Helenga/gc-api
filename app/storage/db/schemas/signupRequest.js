@@ -1,39 +1,29 @@
-// const Mongoose = require('mongoose');
-// const timestamp = require('mongoose-timestamp');
+const validators = require('../validators');
 
-// const Schema = new Mongoose.Schema(
 const SignupRequestSchema = {
   requestor: {
     name: {
-      first: {
-        type: String,
-        trim: true,
-        required: true
-      },
-      last: {
-        type: String,
-        trim: true,
-        required: true
-      }
+      type: String,
+      required: true,
+      max: 150
     },
     email: {
       type: String,
-      default: ""
+      validate: {
+        validator: validators.email,
+        message: props => `${props.value} is not a valid email`
+      },
+      default: ''
     },
     phone: {
       type: String,
       validate: {
-        validator: function(v) {
-          return /\{\d}*/.test(v)
-        },
+        validator: validators.phone,
         message: props => `${props.value} is not a valid phone number`
-      }
+      },
+      default: ''
     }
   }
 }
-// )
-// Schema.plugin(timestamp)
-
-// module.exports = Mongoose.model('SignupRequest', Schema)
 
 module.exports = SignupRequestSchema

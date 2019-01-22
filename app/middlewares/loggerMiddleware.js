@@ -49,6 +49,7 @@ const handler = () => function (ctx, next) {
     res: ctx,
     err: ctx
   })
+  return next()
 }
 
 module.exports = {

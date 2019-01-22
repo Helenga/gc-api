@@ -1,34 +1,31 @@
 const dbOperations = require('../storage/db/operations');
+const AppException = require('../exceptions/appException');
 
 exports.createSignupRequest = ({
   name,
-  surname,
-  contact
+  phone,
+  email
 }) => new Promise(
   async (resolve, reject) => {
     try {
-      if (!contact) {
-        resolve({
-          success: false,
-          message: 'Contact is required'
-        })
-        return
+      if (!phone && !email) {
+        throw new AppException(
+          "Phone or email, at least one, is required.",
+          400)
       }
+      const requestor = {
+        name
+      }
+      if (phone){
+        phone = phone.replace(/\+|-|\(|\)/g, '')
+        requestor.phone = phone
+      }
+      if (email)
+        requestor.email = email
       const signupRequest = await dbOperations.create(
         'signupRequest',
-        {
-          requestor: {
-            name: {
-              first: name,
-              last: surname
-            },
-            email: contact
-        }
-      })
-      resolve({
-        success: true,
-        data: signupRequest
-      })
+        {requestor: requestor})
+      resolve(signupRequest)
     }
     catch (error) {
       reject(error)

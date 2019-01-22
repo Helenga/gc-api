@@ -1,3 +1,4 @@
+const AppException = require('../../../exceptions/appException');
 const {buildModelFromSchema} = require('../utils');
 
 module.exports = (schemaName, object) =>
@@ -9,6 +10,6 @@ module.exports = (schemaName, object) =>
       const instance = await newInstance.save()
       resolve(instance)
     } catch (error) {
-      reject(error)
+      reject(new AppException(error.message, 400))
     }
 })
