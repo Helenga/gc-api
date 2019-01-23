@@ -10,6 +10,9 @@ const connectionURL = process.env.NODE_ENV === 'production' ?
   `mongodb://${dbConfig.user}:${dbConfig.password}@${connectionURLBase}` :
   `mongodb://${connectionURLBase}`
 
+if (process.env.NODE_ENV === 'development')
+  mongoose.set('debug', true)
+
 mongoose.connect(connectionURL, {
   useNewUrlParser: true,
   connectTimeoutMS: 3000
