@@ -17,12 +17,16 @@
   "license": "ISC",
   "dependencies": {
     "@koa/cors": "^2.2.3",
+    "jsonwebtoken": "^8.4.0",
     "koa": "^2.6.2",
     "koa-bodyparser": "^4.2.1",
     "koa-bunyan-logger": "^2.1.0",
+    "koa-passport": "^4.1.1",
     "koa-router": "^7.4.0",
     "mongoose": "^5.4.4",
-    "mongoose-timestamp": "^0.6.0"
+    "mongoose-timestamp": "^0.6.0",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0"
   },
   "devDependencies": {
     "dotenv": "^6.2.0",

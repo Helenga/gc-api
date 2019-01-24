@@ -7,6 +7,10 @@ module.exports = {
   host: process.env.HOST,
   port: process.env.PORT,
   cors_origin: process.env.CORS_ORIGIN,
+  jwt: {
+    secret: process.env.JWT_SECRET,
+    expiresIn: process.env.JWT_EXPIRATION
+  },
 
   db: {
     host: process.env.DB_HOST,
