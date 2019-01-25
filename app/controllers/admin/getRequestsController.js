@@ -1,9 +1,11 @@
 const jwtService = require('../../services/jwtService');
+const {find} = require('../../storage/db/operations');
 
 module.exports = async (ctx, next) => {
-  const userId = await jwtService
+  await jwtService
     .getUserIdIfPermissions(['admin'], ctx, next)
+  const requests = await find('signupRequest', {}, 'find')
   return {
-    requests: [userId]
+    requests
   }
 }

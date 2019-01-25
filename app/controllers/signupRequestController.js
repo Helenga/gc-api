@@ -4,6 +4,6 @@ module.exports = async (ctx, next) => {
     const signupRequest = await signupRequestService
       .createSignupRequest({...ctx.request.body})
     return {
-      id: signupRequest._id
+      _id: signupRequest._id
     }
 }

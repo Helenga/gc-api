@@ -1,10 +1,13 @@
 const Mongoose = require('mongoose');
-const timestamp = require('mongoose-timestamp');
 
 exports.buildModelFromSchema = (modelName, schema) => {
   if (model = Mongoose.models[modelName])
     return model
-  const Schema = new Mongoose.Schema(schema)
-  Schema.plugin(timestamp)
+  const Schema = new Mongoose.Schema(
+    schema,
+    {timestamps: {
+      createdAt: 'created_at',
+      updatedAt: 'updated_at'
+    }})
   return Mongoose.model(modelName, Schema)
 }

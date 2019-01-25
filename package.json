@@ -24,7 +24,6 @@
     "koa-passport": "^4.1.1",
     "koa-router": "^7.4.0",
     "mongoose": "^5.4.4",
-    "mongoose-timestamp": "^0.6.0",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0"
   },
