@@ -13,10 +13,10 @@ const jwtOptions = {
 KoaPassport.use(new JwtStrategy(
   jwtOptions,
   function(jwtPayload, done){
-    if (new Date(jwtPayload.exp * 1000) < new Date() || isAuthorized())
-      return done(new AppException('Unauthorized', 401), false)
+    if (new Date(jwtPayload.exp * 1000) < new Date())
+      return done(new AppException('Token is expired', 401), false)
     return done(null, {id: jwtPayload.id, role: jwtPayload.role})
   }
 ))
 
-module.exports = () => KoaPassport.initialize()
+module.exports = KoaPassport

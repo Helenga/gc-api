@@ -9,9 +9,8 @@ const app = new Koa()
 app.use(middlewares.logger.entry())
 app.use(middlewares.logger.handler())
 app.use(middlewares.cors())
-app.use(middlewares.auth())
+app.use(middlewares.auth.initialize())
 app.use(middlewares.bodyparser())
-app.use(middlewares.guard)
 app.use(middlewares.responseWrapper)
 
 // ROUTER SETUP
