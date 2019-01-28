@@ -2,7 +2,7 @@ const controllers = require('../controllers/index');
 const router = require('./index');
 
 router.post('/signup/request', controllers.signupRequest)
-// router.post('/signup', controllers.signup)
+router.post('/signup', controllers.signup)
 router.post('/signin', controllers.signin)
 
 // // ADMIN

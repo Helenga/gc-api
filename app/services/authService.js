@@ -44,6 +44,17 @@ exports.verifyCredentialsOf = (role, {
   }
 )
 
+exports.encryptPassword = (password) => new Promise(
+  async (resolve, reject) => {
+    try {
+      const encrypted = await encryptPassword(password)
+      resolve(encrypted)
+    } catch (error) {
+      reject(error)
+    }
+  }
+)
+
 exports.generatePassword = () => new Promise(
   async (resolve, reject) => {
     try {
