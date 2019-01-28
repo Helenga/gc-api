@@ -2,15 +2,17 @@ const validators = require('../validators');
 
 const userSchema = {
   role: {
-    type: Number,
-    /*
-    // 0: customer
-    // 1: celebrity
-    */
-    enum: [0, 1],
+    type: String,
+    enum: [
+      'customer', 'celebrity'
+    ],
     required: true
   },
-  password: {
+  hash: {
+    type: String,
+    required: true
+  },
+  salt: {
     type: String,
     required: true
   },
@@ -39,13 +41,7 @@ const userSchema = {
       type: String,
       required: true
     }
-  },
-  profile:
-    (function() {
-      this.profile = this.role === 0 ?
-        require('./customer') :
-        require('./celebrity')
-    })()
+  }
 }
 
 module.exports = userSchema

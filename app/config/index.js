@@ -26,5 +26,11 @@ module.exports = {
     level: process.env.NODE_ENV !== 'production' ?
       process.env.LOG_LEVEL_DEV :
       process.env.LOG_LEVEL_PROD
+  },
+
+  domain: {
+    celebrity: {
+      signupPasswordLength: 16
+    }
   }
 }

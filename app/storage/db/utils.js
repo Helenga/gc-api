@@ -1,6 +1,6 @@
 const Mongoose = require('mongoose');
 
-exports.buildModelFromSchema = (modelName, schema) => {
+exports.buildModelFromSchema = (modelName, schema, extendingSchema) => {
   if (model = Mongoose.models[modelName])
     return model
   const Schema = new Mongoose.Schema(
@@ -8,6 +8,12 @@ exports.buildModelFromSchema = (modelName, schema) => {
     {timestamps: {
       createdAt: 'created_at',
       updatedAt: 'updated_at'
-    }})
+    },
+    validateBeforeSave: true,
+    strict: 'throw'
+  })
+
+  if (extendingSchema)
+    Schema.add(extendingSchema)
   return Mongoose.model(modelName, Schema)
 }

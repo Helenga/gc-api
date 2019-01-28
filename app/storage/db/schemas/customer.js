@@ -1,28 +1,32 @@
-const ObjectId = require('mongoose').Types.ObjectId;
+const ObjectId = require('mongoose').Schema.Types.ObjectId;
 
 const customerSchema = {
   country: {
-    type: String
+    type: String,
+    default: ''
   },
   avatar: {
-    type: String
+    type: String,
+    default: ''
   },
-  orders: {
-    type: [ObjectId]
-  },
+  orders: [{
+    type: ObjectId,
+    default: []
+  }],
   videos: {
-    reactions_to: {
-      type: [ObjectId]
-    },
-    liked: {
-      type: [ObjectId]
-    },
-    obtained: {
-      type: [ObjectId]
-    }
+    reactions_to: [{
+      type: ObjectId,
+      default: []
+    }],
+    liked: [{
+      type: ObjectId,
+      default: []
+    }],
+    obtained: [{
+      type: ObjectId,
+      default: []
+    }]
   }
-
-
 }
 
 module.exports = customerSchema

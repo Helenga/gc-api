@@ -25,16 +25,11 @@ const SignupRequestSchema = {
     }
   },
   status: {
-    type: Number,
-    /*
-    // 0: unchecked
-    // 1: checking
-    // 2: accepted
-    // 3: denied
-    // 4: completed
-    */
-    enum: [0, 1, 2, 3, 4],
-    default: 0
+    type: String,
+    enum: [
+      'unchecked', 'checking', 'accepted', 'denied', 'completed'
+    ],
+    default: 'unchecked'
   }
 }
 

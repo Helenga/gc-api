@@ -5,12 +5,17 @@ const encrypt = (password, salt) => {
 }
 
 exports.encryptPassword = (password) => {
+  const salt = crypto.randomBytes(128).toString('base64')
   return {
-    salt: crypto.randomBytes(128).toString('base64'),
+    salt,
     hash: encrypt(password, salt)
   }
 }
 
 exports.isPasswordValid = (password, salt, hash) => {
   return encrypt(password, salt) == hash
+}
+
+exports.getRandomString = (length) => {
+  return crypto.randomBytes(length).toString('hex')
 }

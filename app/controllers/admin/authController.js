@@ -7,6 +7,6 @@ module.exports = async (ctx, next) => {
     const token = await jwtService
       .getTokenFor('admin', admin)
     return {
-      token: token
+      token
     }
 }

@@ -6,6 +6,7 @@ const adminAuth = require('./admin/authController');
 const adminGetRequests = require('./admin/getRequestsController');
 const adminGetRequest = require('./admin/getRequestController');
 const adminUpdateRequestStatus = require('./admin/updateRequestStatusController');
+const adminCreateCelebrity = require('./admin/createCelebrity');
 
 controllers = {
   signupRequest,
@@ -16,7 +17,8 @@ controllers = {
     auth: adminAuth,
     getRequest: adminGetRequest,
     getRequests: adminGetRequests,
-    updateRequestStatus: adminUpdateRequestStatus
+    updateRequestStatus: adminUpdateRequestStatus,
+    createCelebrity: adminCreateCelebrity
   }
 }
 
