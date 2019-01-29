@@ -9,10 +9,8 @@ exports.buildModelFromSchema = (modelName, schema, extendingSchema) => {
       createdAt: 'created_at',
       updatedAt: 'updated_at'
     },
-    validateBeforeSave: true,
-    strict: 'throw'
+    validateBeforeSave: true
   })
-
   if (extendingSchema)
     Schema.add(extendingSchema)
   return Mongoose.model(modelName, Schema)

@@ -12,7 +12,7 @@ exports.findUserByCredentials = ({
     try {
       const dbQuery = { $or: [
         {email: login},
-        {phone: login}
+        {phone: login.replace(/\+|-|\(|\)/g, '')}
       ]}
       const user = await dbOperations.find('user', dbQuery, 'findOne')
       if (!user)
