@@ -13,4 +13,4 @@ module.exports = (schemaName, object, extendingSchemaName) =>
     } catch (error) {
       reject(new AppException(error.message, 400))
     }
-})  
+})

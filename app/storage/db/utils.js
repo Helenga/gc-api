@@ -1,8 +1,6 @@
 const Mongoose = require('mongoose');
 
 exports.buildModelFromSchema = (modelName, schema, extendingSchema) => {
-  if (model = Mongoose.models[modelName])
-    return model
   const Schema = new Mongoose.Schema(
     schema,
     {timestamps: {
@@ -13,5 +11,11 @@ exports.buildModelFromSchema = (modelName, schema, extendingSchema) => {
   })
   if (extendingSchema)
     Schema.add(extendingSchema)
+  if (model = Mongoose.models[modelName]){
+    if (model.schema.tree != Schema.tree)
+      delete Mongoose.models[modelName]
+    else
+      return model
+  }
   return Mongoose.model(modelName, Schema)
 }
