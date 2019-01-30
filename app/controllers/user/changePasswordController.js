@@ -1,19 +1,9 @@
 const jwtService = require('../../services/jwtService');
-const db = require('../../storage/db/operations');
+const userService = require('../../services/userService');
 
 module.exports = async (ctx, next) => {
-  const {id, role} = await jwtService
+  const {id} = await jwtService
     .getTokenInfoIfPermissions(['customer', 'celebrity'], ctx, next)
-  const user = await db.find(
-    {
-      schemaName: 'user',
-      extendingSchemaName: role
-    },
-    'findOne',
-    {
-      findBy: {_id: id}
-    })
-  return {
-    user
-  }
+  await userService.changePassword(id, {...ctx.request.body})
+  return
 }

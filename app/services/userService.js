@@ -1,4 +1,5 @@
 const db = require('../storage/db/operations');
+const {isPasswordValid, encryptPassword} = require('../utils/cryptoUtil');
 const AppException = require('../exceptions/appException');
 
 const requiredFields = {
@@ -63,6 +64,38 @@ exports.updateProfileData = (
       resolve(updatedUser)
     }
     catch (error) {
+      reject(error)
+    }
+  }
+)
+
+exports.changePassword = (
+ userId,
+ {password}
+) => new Promise(
+  async (resolve, reject) => {
+    try {
+      const user = await db.find(
+        {
+          schemaName: 'user'
+        },
+        'findById',
+        {
+          findBy: userId
+        })
+      if (!isPasswordValid(password.old, user.salt, user.hash))
+        throw new AppException("Incorrect old password", 400)
+      const {hash, salt} = encryptPassword(password.new)
+      await db.update(
+        {schemaName: 'user'},
+        'updateOne',
+        {
+          findBy: {_id: user.id},
+          updateFields: {hash, salt}
+        }
+      )
+      resolve()
+    } catch (error) {
       reject(error)
     }
   }
