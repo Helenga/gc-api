@@ -1,11 +1,15 @@
 const jwtService = require('../../services/jwtService');
-const {find} = require('../../storage/db/operations');
+const db = require('../../storage/db/operations');
 
 module.exports = async (ctx, next) => {
   await jwtService
-    .getUserIdIfPermissions(['admin'], ctx, next)
+    .getTokenInfoIfPermissions(['admin'], ctx, next)
   const dbQuery = {status: ctx.query['status']} || {}
-  const requests = await find('signupRequest', dbQuery, 'find')
+  const requests = await db.find(
+    {schemaName: 'signupRequest'},
+    'find',
+    {findBy: dbQuery}
+  )
   return {
     requests
   }

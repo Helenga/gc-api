@@ -1,4 +1,4 @@
-const dbOperations = require('../storage/db/operations');
+const db = require('../storage/db/operations');
 const AppException = require('../exceptions/appException');
 const {isPasswordValid, getRandomString,
   encryptPassword} = require('../utils/cryptoUtil');
@@ -14,7 +14,11 @@ exports.findUserByCredentials = ({
         {email: login},
         {phone: login.replace(/\+|-|\(|\)/g, '')}
       ]}
-      const user = await dbOperations.find('user', dbQuery, 'findOne')
+      const user = await db.find(
+        {schemaName: 'user'},
+        'findOne',
+        {findBy: dbQuery}
+      )
       if (!user)
         throw new AppException("User not found", 404)
       if (!isPasswordValid(password, user.salt, user.hash))
@@ -32,8 +36,11 @@ exports.verifyCredentialsOf = (role, {
 }) => new Promise(
   async (resolve, reject) => {
     try {
-      const user = await dbOperations.find(
-        role, {login}, 'findOne')
+      const user = await db.find(
+        {schemaName: role},
+        'findOne',
+        {findBy: login}
+      )
       if (user && isPasswordValid(password, user.salt, user.hash))
         resolve(user)
       else

@@ -4,26 +4,25 @@ const AppException = require('../exceptions/appException');
 const requiredFields = {
   celebrity: {
     "name": {
-      "first": "",
-      "second": ""
+      "first": undefined,
+      "second": undefined
     },
-    "email": "",
-    "phone": "",
-    "country": "",
-    "nickname": "",
-    "categories": [],
-    "info": "",
-    "site": "",
-
+    "email": undefined,
+    "phone": undefined,
+    "country": undefined,
+    "nickname": undefined,
+    "categories": undefined,
+    "info": undefined,
+    "site": undefined
   },
   customer: {
     "name": {
-      "first": "",
-      "second": ""
+      "first": undefined,
+      "second": undefined
     },
-    "email": "",
-    "phone": "",
-    "country": ""
+    "email": undefined,
+    "phone": undefined,
+    "country": undefined
   }
 }
 
@@ -44,14 +43,23 @@ exports.updateProfileData = (
         throw new AppException('Phone or email, at least one, is required', 400)
       if (data.phone)
         data.phone = data.phone.replace(/\+|-|\(|\)/g, '')
-      const user = await db.find('user', userId, 'findById')
-      console.log('filterFields[user.role] :', filterFields[user.role]);
+      const user = await db.find(
+        {schemaName: 'user'},
+        'findById',
+        {findBy: userId}
+      )
       const updatedUser = await db.update(
-        'user',
-        {_id: userId},
-        {...requiredFields[user.role]} = data,
+        {
+          schemaName: 'user',
+          extendingSchemaName: user.role
+        },
         'findOneAndUpdate',
-        filterFields[user.role])
+        {
+          findBy: {_id: userId},
+          updateFields: {...requiredFields[user.role]} = data,
+          projection: filterFields[user.role]
+        }
+      )
       resolve(updatedUser)
     }
     catch (error) {

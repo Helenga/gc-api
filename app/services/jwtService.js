@@ -20,7 +20,7 @@ exports.getTokenFor = (role, user) => new Promise(
   }
 )
 
-exports.getUserIdIfPermissions = async (allowedRoles, ctx, next) => {
+exports.getTokenInfoIfPermissions = async (allowedRoles, ctx, next) => {
   const authHeader = ctx.req.headers['authorization']
   if (authHeader && authHeader.includes('Bearer')) {
     jwt.verify(authHeader.split(' ')[1],
@@ -32,12 +32,12 @@ exports.getUserIdIfPermissions = async (allowedRoles, ctx, next) => {
       await passport.authenticate(
         'jwt',
         {session: false},
-        function(err, user) {
+        function(err, tokenInfo) {
         if (err)
           reject(err)
-        if (!user.role in allowedRoles)
+        if (!tokenInfo.role in allowedRoles)
           reject(new AppException("Access denied", 401))
-        resolve(user.id)
+        resolve(tokenInfo)
       })(ctx, next)
   })
 }

@@ -1,4 +1,4 @@
-const dbOperations = require('../storage/db/operations');
+const db = require('../storage/db/operations');
 const AppException = require('../exceptions/appException');
 
 exports.createSignupRequest = ({
@@ -22,9 +22,10 @@ exports.createSignupRequest = ({
       }
       if (email)
         requestor.email = email
-      const signupRequest = await dbOperations.create(
-        'signupRequest',
-        {requestor: requestor})
+      const signupRequest = await db.create(
+        {schemaName: 'signupRequest'},
+        requestor
+      )
       resolve(signupRequest)
     }
     catch (error) {

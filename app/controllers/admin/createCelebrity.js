@@ -4,7 +4,7 @@ const authService = require('../../services/authService');
 
 module.exports = async (ctx, next) => {
   await jwtService
-    .getUserIdIfPermissions(['admin'], ctx, next)
+    .getTokenInfoIfPermissions(['admin'], ctx, next)
   const passwordSet = await authService.generatePassword()
   const celebrity = await signupService.signupUser({
       ...ctx.request.body,

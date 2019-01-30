@@ -1,13 +1,15 @@
 const AppException = require('../../../exceptions/appException');
 const {buildModelFromSchema} = require('../utils');
 
-module.exports = (schemaName, object, extendingSchemaName) =>
+module.exports = (
+  {schemaName,
+  extendingSchemaName},
+  modelData
+  ) =>
   new Promise( async (resolve, reject) => {
     try {
-      const schema = require(`../schemas/${schemaName}`)
-      const extendingSchema = require(`../schemas/${extendingSchemaName}`);
-      const Model = buildModelFromSchema(schemaName, schema, extendingSchema)
-      const newInstance = new Model(object);
+      const Model = buildModelFromSchema(schemaName, extendingSchemaName)
+      const newInstance = new Model(modelData);
       const instance = await newInstance.save()
       resolve(instance)
     } catch (error) {

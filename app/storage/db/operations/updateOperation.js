@@ -1,24 +1,25 @@
 const {buildModelFromSchema} = require('../utils');
 
 module.exports = (
-  schemaName,
-  findBy,
-  updateFields,
+  {schemaName,
+  extendingSchemaName},
   methodName,
-  select
+  {findBy,
+  updateFields,
+  projection}
 ) => new Promise(
   async (resolve, reject) => {
     try {
       if (!methodName in ['update', 'updateOne', 'updateMany', 'findOneAndUpdate'])
         throw new Error("Update operation method is not allowed")
-      const schema = require(`../schemas/${schemaName}`)
-      const Model = buildModelFromSchema(schemaName, schema)
+      const Model = buildModelFromSchema(schemaName, extendingSchemaName)
       const options = {
-        runValidators: true
+        runValidators: true,
+        new: true
       }
       const query = Model[methodName](findBy, {$set: updateFields}, options)
-      if (select)
-        query.select(select)
+      if (projection)
+        query.select(projection)
       resolve(query.exec())
     } catch (error) {
       reject(error)

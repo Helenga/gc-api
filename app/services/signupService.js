@@ -1,4 +1,4 @@
-const dbOperations = require('../storage/db/operations');
+const db = require('../storage/db/operations');
 const AppException = require('../exceptions/appException');
 
 exports.signupUser = ({
@@ -24,17 +24,22 @@ exports.signupUser = ({
       }
       if (await areCredentialsOccupied(credentials))
         throw new AppException("User with such credentials already exists", 409)
-      const user = await dbOperations.create('user', {
-        name: {
-          first: name,
-          second: surname
+      const user = await db.create(
+        {
+          schemaName: 'user',
+          extendingSchemaName: role
         },
-        role,
-        email,
-        phone,
-        hash,
-        salt
-      }, role)
+        {
+          name: {
+            first: name,
+            second: surname
+          },
+          role,
+          email,
+          phone,
+          hash,
+          salt
+        })
       resolve(user)
     }
     catch (error) {
@@ -48,6 +53,9 @@ async function areCredentialsOccupied (credentials) {
     {email: credentials.email},
     {phone: credentials.phone}
   ]}
-  const user = await dbOperations.find('user', dbQuery, 'findOne')
+  const user = await db.find(
+    {schemaName: 'user'},
+    'findOne',
+    {findBy: dbQuery})
   return !!user
 }
