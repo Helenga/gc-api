@@ -13,6 +13,7 @@ router.put('/user/password', controllers.user.updatePassword)
 router.post('/user/avatar', controllers.user.updateAvatar)
 
 // CELEBRITY ONLY
+router.post('/celebrity/videos/own', controllers.celebrity.createVideo)
 
 // CUSTOMER ONLY
 

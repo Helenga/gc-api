@@ -10,6 +10,7 @@ const updatePassword = require('./user/updatePasswordController');
 const updateAvatar = require('./user/updateAvatarController');
 
 // CELEBRITY ONLY
+const createVideo = require('./celebrity/createVideo');
 
 // CUSTOMER ONLY
 
@@ -37,7 +38,7 @@ controllers = {
   },
 
   celebrity: {
-
+    createVideo
   },
 
   admin: {

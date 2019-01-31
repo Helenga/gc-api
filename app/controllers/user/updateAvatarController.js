@@ -1,6 +1,5 @@
 const jwtService = require('../../services/jwtService');
 const userService = require('../../services/userService');
-const imageService = require('../../services/imageService');
 const config = require('../../config');
 
 module.exports = async (ctx, next) => {
