@@ -22,15 +22,7 @@ const celebritySchema = {
     maxLength: 160,
     default: ''
   },
-  country: {
-    type: String,
-    default: ''
-  },
   site: {
-    type: String,
-    default: ''
-  },
-  avatar: {
     type: String,
     default: ''
   },

@@ -6,7 +6,8 @@ const signin = require('./signinController');
 // USER (CELEBRITY & CUSTOMER)
 const getProfile = require('./user/getProfileController');
 const updateProfile = require('./user/updateProfileController');
-const changePassword = require('./user/changePasswordController');
+const updatePassword = require('./user/updatePasswordController');
+const updateAvatar = require('./user/updateAvatarController');
 
 // CELEBRITY ONLY
 
@@ -27,7 +28,8 @@ controllers = {
   user: {
     getProfile,
     updateProfile,
-    changePassword
+    updatePassword,
+    updateAvatar
   },
 
   customer: {

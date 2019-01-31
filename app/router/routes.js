@@ -9,7 +9,8 @@ router.post('/signin', controllers.signin)
 // USER (CUSTOMER & CELEBRITY)
 router.get('/user', controllers.user.getProfile)
 router.put('/user', controllers.user.updateProfile)
-router.put('/user/password', controllers.user.changePassword)
+router.put('/user/password', controllers.user.updatePassword)
+router.post('/user/avatar', controllers.user.updateAvatar)
 
 // CELEBRITY ONLY
 

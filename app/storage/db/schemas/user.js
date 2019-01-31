@@ -41,6 +41,14 @@ const userSchema = {
       type: String,
       required: true
     }
+  },
+  country: {
+    type: String,
+    default: ''
+  },
+  avatar: {
+    type: String,
+    default: ''
   }
 }
 

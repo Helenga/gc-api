@@ -19,6 +19,14 @@ module.exports = {
     user: process.env.DB_USER || "",
     password: process.env.DB_PASSWORD || ""
   },
+
+  fs: {
+    imagePath: process.env.FS_IMAGE_PATH ||
+      path.resolve(__dirname, '../../../store/images'),
+    videoPath: process.env.FS_VIDEO_PATH ||
+      path.resolve(__dirname, '../../../store/videos')
+  },
+
   log: {
     path: process.env.IS_LOG_DIRECTORY_RELATIVE_PATH ?
       path.resolve(`${process.env.LOG_DIRECTORY}/${process.env.LOG_FILENAME}`) :

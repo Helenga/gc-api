@@ -100,3 +100,21 @@ exports.changePassword = (
     }
   }
 )
+
+exports.updateAvatar = (userId, fileName) => new Promise(
+  async (resolve, reject) => {
+    try {
+      await db.update(
+        {schemaName: 'user'},
+        'updateOne',
+        {
+          findBy: {_id: userId},
+          updateFields: {avatar: fileName}
+        }
+      )
+      resolve()
+    } catch (error) {
+      reject(error)
+    }
+  }
+)
