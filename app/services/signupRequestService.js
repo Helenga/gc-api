@@ -3,6 +3,7 @@ const AppException = require('../exceptions/appException');
 
 exports.createSignupRequest = ({
   name,
+  surname,
   phone,
   email
 }) => new Promise(
@@ -14,7 +15,8 @@ exports.createSignupRequest = ({
           400)
       }
       const requestor = {
-        name
+        name,
+        surname
       }
       if (phone){
         phone = phone.replace(/\+|-|\(|\)/g, '')
@@ -24,7 +26,7 @@ exports.createSignupRequest = ({
         requestor.email = email
       const signupRequest = await db.create(
         {schemaName: 'signupRequest'},
-        requestor
+        {requestor}
       )
       resolve(signupRequest)
     }

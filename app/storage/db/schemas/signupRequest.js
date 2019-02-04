@@ -7,6 +7,11 @@ const SignupRequestSchema = {
       required: true,
       max: 150
     },
+    surname: {
+      type: String,
+      required: true,
+      max: 150
+    },
     email: {
       type: String,
       validate: {

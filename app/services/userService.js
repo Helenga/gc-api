@@ -57,7 +57,7 @@ exports.updateProfileData = (
         'findOneAndUpdate',
         {
           findBy: {_id: userId},
-          updateFields: {...requiredFields[user.role]} = data,
+          updateFields: {$set: {...requiredFields[user.role]} = data},
           projection: filterFields[user.role]
         }
       )
@@ -91,7 +91,7 @@ exports.changePassword = (
         'updateOne',
         {
           findBy: {_id: user.id},
-          updateFields: {hash, salt}
+          updateFields: {$set: {hash, salt}}
         }
       )
       resolve()
@@ -109,7 +109,7 @@ exports.updateAvatar = (userId, fileName) => new Promise(
         'updateOne',
         {
           findBy: {_id: userId},
-          updateFields: {avatar: fileName}
+          updateFields: {$set: {avatar: fileName}}
         }
       )
       resolve()

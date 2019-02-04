@@ -1,6 +1,11 @@
 const validators = require('../validators');
 
 const userSchema = {
+  nickname: {
+    type: String,
+    default: '',
+    unique: true
+  },
   role: {
     type: String,
     enum: [

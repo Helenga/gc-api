@@ -8,7 +8,9 @@ exports.signupUser = ({
   email,
   phone,
   hash,
-  salt
+  salt,
+  nickname,
+  country
 }) => new Promise(
   async (resolve, reject) => {
     try {
@@ -38,7 +40,9 @@ exports.signupUser = ({
           email,
           phone,
           hash,
-          salt
+          salt,
+          nickname,
+          country
         })
       resolve(user)
     }

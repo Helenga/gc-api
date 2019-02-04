@@ -17,7 +17,7 @@ module.exports = (
         runValidators: true,
         new: true
       }
-      const query = Model[methodName](findBy, {$set: updateFields}, options)
+      const query = Model[methodName](findBy, updateFields, options)
       if (projection)
         query.select(projection)
       resolve(query.exec())

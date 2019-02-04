@@ -1,11 +1,6 @@
 const ObjectId = require('mongoose').Schema.Types.ObjectId;
 
 const celebritySchema = {
-  nickname: {
-    type: String,
-    default: '',
-    unique: true
-  },
   categories: [{
     type: String,
     enum: [

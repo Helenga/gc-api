@@ -9,7 +9,7 @@ module.exports = async (ctx, next) => {
     'updateOne',
     {
       findBy: {_id: ctx.params.id},
-      updateFields: {status: ctx.request.body.status}
+      updateFields: {$set: {status: ctx.request.body.status}}
     }
   )
   return

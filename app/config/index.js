@@ -21,6 +21,8 @@ module.exports = {
   },
 
   fs: {
+    rootPath: process.env.FS_ROOT_PATH ||
+      path.resolve(__dirname, '../../../store'),
     imagePath: process.env.FS_IMAGE_PATH ||
       path.resolve(__dirname, '../../../store/images'),
     videoPath: process.env.FS_VIDEO_PATH ||
