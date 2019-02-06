@@ -1,5 +1,6 @@
 const db = require('../storage/db/operations');
 const {isPasswordValid, encryptPassword} = require('../utils/cryptoUtil');
+const {addDomainPrefixToPath} = require('../utils/uriUtil');
 const AppException = require('../exceptions/appException');
 
 const requiredFields = {
@@ -23,7 +24,8 @@ const requiredFields = {
     },
     "email": undefined,
     "phone": undefined,
-    "country": undefined
+    "country": undefined,
+    "nickname": undefined
   }
 }
 
@@ -104,15 +106,17 @@ exports.changePassword = (
 exports.updateAvatar = (userId, fileName) => new Promise(
   async (resolve, reject) => {
     try {
-      await db.update(
+      const {avatar} = await db.update(
         {schemaName: 'user'},
-        'updateOne',
+        'findOneAndUpdate',
         {
           findBy: {_id: userId},
-          updateFields: {$set: {avatar: fileName}}
+          updateFields: {$set: {avatar: fileName}},
+          projection: 'avatar'
         }
       )
-      resolve()
+      const avatarUri = addDomainPrefixToPath(avatar)
+      resolve(avatarUri)
     } catch (error) {
       reject(error)
     }

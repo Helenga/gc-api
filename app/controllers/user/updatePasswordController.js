@@ -5,5 +5,5 @@ module.exports = async (ctx, next) => {
   const {id} = await jwtService
     .getTokenInfoIfPermissions(['customer', 'celebrity'], ctx, next)
   await userService.changePassword(id, {...ctx.request.body})
-  return
+  return next()
 }
