@@ -39,7 +39,7 @@ exports.verifyCredentialsOf = (role, {
       const user = await db.find(
         {schemaName: role},
         'findOne',
-        {findBy: login}
+        {findBy: {login}}
       )
       if (user && isPasswordValid(password, user.salt, user.hash))
         resolve(user)
