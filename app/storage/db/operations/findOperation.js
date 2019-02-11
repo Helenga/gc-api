@@ -5,7 +5,9 @@ module.exports = (
   extendingSchemaName},
   methodName,
   {findBy,
-  projection}
+  projection,
+  skip,
+  take}
   ) => new Promise(
     (resolve, reject) => {
       try {
@@ -13,6 +15,7 @@ module.exports = (
           throw new Error("Find operation method is not allowed")
         const Model = buildModelFromSchema(schemaName, extendingSchemaName)
         const query = Model[methodName](findBy, projection)
+          .skip(skip).limit(take)
         resolve(query.exec())
       } catch (error) {
         reject(error)

@@ -1,11 +1,11 @@
 const ObjectId = require('mongoose').Schema.Types.ObjectId;
 
 const videoSchema = {
-  _authorId: {
+  author_id: {
     type: ObjectId,
     required: true
   },
-  _ownerId: {
+  owner_id: {
     type: ObjectId
   },
   name: {

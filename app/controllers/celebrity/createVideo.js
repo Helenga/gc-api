@@ -19,7 +19,12 @@ module.exports = async (ctx, next) => {
     'updateOne',
     {
       findBy: {_id: id},
-      updateFields: {$push: {'videos.own': video._id}}
+      updateFields: {$push: {
+        'videos.own.$.name.video': video.name.video,
+        'videos.own.$.name.cover': video.name.cover,
+        'videos.own.$.likes': video.likes,
+        'videos.own.$.views': video.views
+    }}
     }
   )
   return {

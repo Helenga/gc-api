@@ -29,12 +29,44 @@ const celebritySchema = {
   // UPPLOADED VIDEOS
   videos: {
     own: [{
-      type: ObjectId,
-      default: []
+      name: {
+        video: {
+          type: String,
+          required: true
+        },
+        cover: {
+          type: String,
+          default: ''
+        }
+      },
+      likes: {
+        type: Number,
+        default: 0
+      },
+      views: {
+        type: Number,
+        default: 0
+      }
     }],
     reactions_from: [{
-      type: ObjectId,
-      default: []
+      name: {
+        video: {
+          type: String,
+          required: true
+        },
+        cover: {
+          type: String,
+          default: ''
+        }
+      },
+      likes: {
+        type: Number,
+        default: 0
+      },
+      views: {
+        type: Number,
+        default: 0
+      }
     }]
   }
 }
